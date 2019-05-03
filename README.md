@@ -18,7 +18,7 @@ This component uses a total difference of a time span. If the state of cross tra
 
 This component uses a differential of the magnitude of variation of control. This means that the component reduce the rapid change of control and minimize overshoot that is caused by rapid change.
 
-## Tuning hyper parameters.
+## Tuning hyper parameters
 
 I had to take manual tuning then I initially started the tuning with the  propotianl component starting at 0.5. I changed parameter from 0.5 to 0.1 at interval of 0.1 until the vehicle reached to the first corner. The vehicle was overshooted when at the first corner then I moved to the differential parameter starting from 0.0 to 1.0. The vehicle gradually reached long distance to go. Finally vechicle can go around the course at P parameter 0.1, D parameter 1.0. In this case, I parameter didn't have strong effect to control the vehiecle. Below is a my tuning history and brief results.  
 
@@ -27,7 +27,7 @@ I had to take manual tuning then I initially started the tuning with the  propot
 |  pid.Init(0.5, 0, 0.0)| Over shooted |
 |  pid.Init(0.1, 0, 0.0)| Drop in the first corner|
 |  pid.Init(0.1, 0, 0.2)| Drop in the first corner|
-| pid.Init(0.1, 0, 0.3)| Drop in First bledge|
+| pid.Init(0.1, 0, 0.3)| Drop in First bridge|
 |  pid.Init(0.1, 0, 1.0)| Success|
 |  pid.Init(0.1, 0.00001, 1.0)| Success|
 
