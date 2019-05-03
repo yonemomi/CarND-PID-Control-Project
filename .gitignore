@@ -1,4 +1,9 @@
-.vscode
-build
-tags
-.editorconfig
+*.gch
+
+# build files
+build/
+
+# editor config
+.vscode/
+
+
