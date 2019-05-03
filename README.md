@@ -18,6 +18,16 @@ This component uses a total difference of a time span. If the state of cross tra
 
 This component uses a differential of the magnitude of variation of control. This means that the component reduce the rapid change of control and minimize overshoot that is caused by rapid change.
 
+## Tuning hyper parameters.
+
+  pid.Init(0.5, 0, 0.0); Over shooted
+  pid.Init(0.1, 0, 0.0); Drop in the first corner
+  pid.Init(0.1, 0, 0.2); Drop in the first corner
+  pid.Init(0.1, 0, 0.3); Drop in First bledge
+  pid.Init(0.1, 0, 1.0); Success
+  pid.Init(0.1, 0.00001, 1.0); Success
+
+
 --
 
 ## Dependencies
