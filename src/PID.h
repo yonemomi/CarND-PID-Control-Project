@@ -56,6 +56,7 @@ class PID {
   int checking_column;
   int checking_status;
   double best_err;
+  double err;
 
   double Dp;
   double Di;
