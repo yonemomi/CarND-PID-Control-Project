@@ -2,14 +2,12 @@
 #include <uWS/uWS.h>
 #include <iostream>
 #include <string>
-#include <vector>
 #include "PID.h"
 #include "json.hpp"
 
 // for convenience
 using nlohmann::json;
 using std::string;
-using std::vector;
 
 // For converting back and forth between radians and degrees.
 constexpr double pi() { return M_PI; }
@@ -65,6 +63,9 @@ int main() {
            * NOTE: Feel free to play around with the throttle and speed.
            *   Maybe use another PID controller to control the speed!
            */
+          if (pid.is_twiddled == false) {
+            pid.Twiddle(0.001, cte, ws);
+          }
           pid.UpdateError(cte);
           steer_value = pid.TotalError();
 

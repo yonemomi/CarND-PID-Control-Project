@@ -1,5 +1,6 @@
 #ifndef PID_H
 #define PID_H
+#include <uWS/uWS.h>
 
 class PID {
  public:
@@ -31,6 +32,10 @@ class PID {
    */
   double TotalError();
 
+  bool Twiddle(double tol, double cte, uWS::WebSocket<uWS::SERVER> ws);
+  void Reset(uWS::WebSocket<uWS::SERVER> ws);
+  bool is_twiddled;
+
  private:
   /**
    * PID Errors
@@ -45,6 +50,16 @@ class PID {
   double Kp;
   double Ki;
   double Kd;
+  /**
+   * Twiddle
+   */
+  int checking_column;
+  int checking_status;
+  double best_err;
+
+  double Dp;
+  double Di;
+  double Dd;
 };
 
 #endif  // PID_H
