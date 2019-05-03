@@ -125,8 +125,8 @@ bool PID::Twiddle(double tol, double cte) {
  * make.robot() run
  * https://knowledge.udacity.com/questions/6171
  */
-void PID::Reset(uWS::WebSocket<uWS::SERVER> ws) {
+//void PID::Reset(uWS::WebSocket<uWS::SERVER> ws) {
   // restart the simulator
-  std::string reset_msg = "42[\"reset\",{}]";
-  ws.send(reset_msg.data(), reset_msg.length(), uWS::OpCode::TEXT);
-}
+//  std::string reset_msg = "42[\"reset\",{}]";
+//  ws.send(reset_msg.data(), reset_msg.length(), uWS::OpCode::TEXT);
+//}
