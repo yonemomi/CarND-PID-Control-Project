@@ -1,5 +1,6 @@
 #include "PID.h"
 #include <uWS/uWS.h>
+#include <iostream>
 #include <numeric>
 #include <vector>
 
@@ -51,20 +52,30 @@ double PID::TotalError() {
 
 bool PID::Twiddle(double tol, double cte, uWS::WebSocket<uWS::SERVER> ws) {
   double sum = Dp + Di + Dd;
+  std::cout << "Twiddling" << std::endl;
+  std::cout << "sum:" << sum << std::endl;
+
   while (sum > tol) {
+    std::cout << "checking status:" << checking_status << std::endl;
     if (checking_status == 0) {
       best_err = cte;
       checking_status += 1;
       Reset(ws);
     }
     if (checking_status == 1) {
+      std::cout << "processing status 1" << std::endl;
       if (checking_column == 0) Kp += Dp;
       if (checking_column == 1) Ki += Di;
       if (checking_column == 2) Kd += Dd;
       checking_status += 1;
+      std::cout << "processing status 1 result" << checking_status << std::endl;
+      std::cout << "processing status 1 Kp" << Kp << std::endl;
+
       Reset(ws);
     }
     if (checking_status == 2) {
+      std::cout << "processing status 2"<< std::endl;
+
       if (cte < best_err) {
         best_err = cte;
         if (checking_column == 0) Dp *= 1.1;
@@ -78,6 +89,7 @@ bool PID::Twiddle(double tol, double cte, uWS::WebSocket<uWS::SERVER> ws) {
       }
     }
     if (checking_status == 3) {
+      std::cout << "processing status 3" << std::endl;
       if (cte < best_err) {
         best_err = cte;
         if (checking_column == 0) Dp *= 1.1;
@@ -93,10 +105,15 @@ bool PID::Twiddle(double tol, double cte, uWS::WebSocket<uWS::SERVER> ws) {
           if (checking_column == 2) Dd *= 0.9;
         }
       }
+      std::cout << "END OF LOOP" << std::endl;
+
       checking_status = 1;
       checking_column = (checking_column + 1) % 3;
     }
   }
+  std::cout << "BEST PARAMETER" << std::endl;
+  std::cout << Kp << "," << Ki << "," << Kd << std::endl;
+
   is_twiddled = true;
   return true;
 }
