@@ -32,8 +32,7 @@ class PID {
    */
   double TotalError();
 
-  bool Twiddle(double tol, double cte, uWS::WebSocket<uWS::SERVER> ws);
-  void Reset(uWS::WebSocket<uWS::SERVER> ws);
+  bool Twiddle(double tol, double cte);
   bool is_twiddled;
 
  private:

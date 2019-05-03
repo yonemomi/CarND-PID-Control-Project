@@ -1,7 +1,24 @@
 # CarND-Controls-PID
 Self-Driving Car Engineer Nanodegree Program
 
----
+## The effect each of the P, I, D components
+
+PID controller is a one of valuable methods to control the target you want on the reference trajectory. PID controller uses three components of propotion between input and output, their integral and their differential. PID is short for these three compontent's head characters.
+
+* Propotional component
+
+This is a main controller to follow the reference trajectory by propotional value of cross track error. If the target is further away from the reference, the greater the correction.
+The purpose of control is to minimize the difference of the target and the reference trajectory. Propotinal component dilectly work to reduce the difference. Therefore, fast correction of this parameter sometimes causes overshoot.
+
+* Integral component
+
+This component uses a total difference of a time span. If the state of cross track error continues for a long time, it serves to increase the change of the input value and bring it closer to the target value. This merits to give an ability to adjust the variation of surrounding situation. But this sometimes gives too much variation when the target and trajectory are away for a long time. This causes unstability.
+
+* Differential component
+
+This component uses a differential of the magnitude of variation of control. This means that the component reduce the rapid change of control and minimize overshoot that is caused by rapid change.
+
+--
 
 ## Dependencies
 
@@ -19,7 +36,7 @@ Self-Driving Car Engineer Nanodegree Program
   * Run either `./install-mac.sh` or `./install-ubuntu.sh`.
   * If you install from source, checkout to commit `e94b6e1`, i.e.
     ```
-    git clone https://github.com/uWebSockets/uWebSockets 
+    git clone https://github.com/uWebSockets/uWebSockets
     cd uWebSockets
     git checkout e94b6e1
     ```
@@ -33,7 +50,7 @@ Fellow students have put together a guide to Windows set-up for the project [her
 1. Clone this repo.
 2. Make a build directory: `mkdir build && cd build`
 3. Compile: `cmake .. && make`
-4. Run it: `./pid`. 
+4. Run it: `./pid`.
 
 Tips for setting up your environment can be found [here](https://classroom.udacity.com/nanodegrees/nd013/parts/40f38239-66b6-46ec-ae68-03afd8a601c8/modules/0949fca6-b379-42af-a919-ee50aa304e6a/lessons/f758c44c-5e40-4e01-93b5-1a82aa4e044f/concepts/23d376c7-0195-4276-bdf0-e02f1f3c665d)
 

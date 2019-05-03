@@ -51,7 +51,7 @@ double PID::TotalError() {
          Kd * d_error;  // TODO: Add your total error calc here!
 }
 
-bool PID::Twiddle(double tol, double cte, uWS::WebSocket<uWS::SERVER> ws) {
+bool PID::Twiddle(double tol, double cte) {
   double sum = d_error + i_error + p_error;
   std::cout << "Twiddling" << std::endl;
   std::cout << "sum:" << sum << std::endl;
@@ -68,7 +68,6 @@ bool PID::Twiddle(double tol, double cte, uWS::WebSocket<uWS::SERVER> ws) {
     if (checking_status == 0) {
       best_err = cte;
       checking_status += 1;
-      Reset(ws);
     }
     if (checking_status == 1) {
       std::cout << "processing status 1" << std::endl;
@@ -76,8 +75,6 @@ bool PID::Twiddle(double tol, double cte, uWS::WebSocket<uWS::SERVER> ws) {
       if (checking_column == 1) Ki += i_error;
       if (checking_column == 2) Kd += d_error;
       checking_status += 1;
-
-      Reset(ws);
     }
     if (checking_status == 2) {
       std::cout << "processing status 2" << std::endl;
@@ -92,7 +89,6 @@ bool PID::Twiddle(double tol, double cte, uWS::WebSocket<uWS::SERVER> ws) {
         if (checking_column == 1) Ki -= 2 * i_error;
         if (checking_column == 2) Kd -= 2 * d_error;
         checking_status += 1;
-        Reset(ws);
 
         if (checking_status == 3) {
           std::cout << "processing status 3" << std::endl;
